@@ -3,7 +3,7 @@ import { Link, Outlet } from 'react-router'
 const Header: React.FC = () => {
     return (
         <>
-        <header>
+        <header data-testId="my-header">
             <ul>
                 <li><Link to="/">Homepage</Link></li>
                 <li><Link to="/user/profile">Proile</Link></li>
