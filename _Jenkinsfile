@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs 'CustomNode'
+    }
+
+    stages {
+        stage('Check node and npm') {
+            steps {
+                sh 'node -v'
+                sh 'npm -v'
+            }
+        }
+
+        stage ('Checkout') {
+            steps {
+                    git branch: 'main', url: 'https://github.com/aldrin027/FullstackBoilerplate.git'
+            }
+        }
+        
+        stage('Install Dependencies') {
+            steps {
+                dir('client') {
+                    sh 'npm install'
+                }
+            }
+        }
+        
+        stage('Tests') {
+            steps {
+                dir('client') {
+                    sh 'npm run test'
+                }
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                dir('client') {
+                    sh 'npm run build'
+                }
+            }
+        }
+    }
+}
